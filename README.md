@@ -1,11 +1,8 @@
-# Django Project README
-
-## Project Name
+## study bodies website (note : this readme is not completed yet)
 
 Brief description of your Django project.
 
 ## Table of Contents
-
 1. [Project Overview](#project-overview)
 2. [Features](#features)
 3. [Installation](#installation)
