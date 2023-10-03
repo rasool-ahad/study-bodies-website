@@ -25,6 +25,7 @@ class Room(models.Model):
         db_table = 'Room'
         verbose_name = 'room'
         verbose_name_plural = 'rooms'
+        ordering = ["-updated","-created"]
 
 class Message(models.Model):
     user = models.ForeignKey(User, verbose_name=_("user"), on_delete=models.CASCADE)
