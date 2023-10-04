@@ -3,4 +3,13 @@
     <input type="text" name="q" placeholder="Search"/>
 </form>
 
+{% if request.user.is_authenticated %}
+<p>{{request.user}}</p>
+<a href="{% url 'logout' %}">logout</a>
+
+{% else %}
+<a href="{% url 'login' %}">login</a>
+
+{% endif %}
+
 <hr/>
