@@ -68,15 +68,18 @@ def home(request):
     rooms = Room.objects.filter(Q(topic__name__icontains=search) |
                                 Q(host__username__icontains=search) |
                                 Q(description__icontains=search))
-    activities = Message.objects.all()
-    
-    
+    activities = Message.objects.filter(Q(room__topic__name__icontains=search))
     topic = Topic.objects.all()
     count = rooms.count()
-
     context = {"rooms": rooms, "topics": topic, "count": count,"activities":activities}
     return render(request, "base/home.html", context)
-
+def userProfile(request,id):
+        user = User.objects.get(id=id)
+        rooms = user.room_set.all()
+        activities = user.message_set.all()
+        topic = Topic.objects.all()
+        context = {"rooms": rooms, "topics": topic,"activities":activities}
+        return render(request, "base/user-profile.html", context)
 
 def room(request, id):
     room = Room.objects.get(pk=id)

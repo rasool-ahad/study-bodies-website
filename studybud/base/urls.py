@@ -13,8 +13,5 @@ urlpatterns = [
     
     path("delete-message/<int:id>", views.delete_message, name="delete-message"),
 
-
-
-
-
+    path("user-profile/<int:id>", views.userProfile, name = "user-profile" )
 ]
