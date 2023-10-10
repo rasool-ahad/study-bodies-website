@@ -104,28 +104,37 @@ def update_room(request, id):
         return HttpResponse("your not allowed here")
     if request.method == "GET":
         form = RoomForm(instance=room)
-        context = {"form": form}
+        topic = Topic.objects.all()
+        context = {"form": form, "topics": topic , "room":room}
         return render(request, "base/room_form.html", context=context)
     else:
-        form = RoomForm(request.POST, instance=room)
-        if form.is_valid:
-            form.save()
-            return redirect("home")
+        topic_name = request.POST.get("topic")
+        topic, created = Topic.objects.get_or_create(name = topic_name)
+        room.name = request.POST.get("name")
+        room.topic = topic
+        room.description = request.POST.get("description")
+
+
+        return redirect("home")
 
 
 @login_required(login_url="/login")
 def creat_room(request):
     if request.method == "GET":
         form = RoomForm()
-        context = {"form": form}
+        topic = Topic.objects.all()
+        context = {"form": form, "topics": topic}
         return render(request, "base/room_form.html", context=context)
     else:
-        form = RoomForm(request.POST)
-        if form.is_valid:
-            room  = form.save(commit=False)
-            room.host = request.user
-            room.save()
-            return redirect("home")
+        topic_name = request.POST.get("topic")
+        topic, created = Topic.objects.get_or_create(name = topic_name)
+        Room.objects.create(
+            host = request.user,
+            topic = topic,
+            name = request.POST.get("name"),
+            description = request.POST.get("description"),
+        )
+        return redirect("home")
 
 
 @login_required(login_url="/login")
