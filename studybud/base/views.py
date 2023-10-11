@@ -68,8 +68,8 @@ def home(request):
     rooms = Room.objects.filter(Q(topic__name__icontains=search) |
                                 Q(host__username__icontains=search) |
                                 Q(description__icontains=search))
-    activities = Message.objects.filter(Q(room__topic__name__icontains=search))
-    topic = Topic.objects.all()
+    activities = Message.objects.filter(Q(room__topic__name__icontains=search))[0:5]
+    topic = Topic.objects.all()[0:5]
     count = rooms.count()
     context = {"rooms": rooms, "topics": topic, "count": count,"activities":activities}
     return render(request, "base/home.html", context)
@@ -174,4 +174,13 @@ def updateUser(request):
             form.save()
             return redirect("user-profile", id = request.user.id)
 
-    
+def topicsPage(request):
+     search = request.GET.get("q", "") 
+     topics = Topic.objects.filter(name__icontains=search)
+     context = {'topics': topics}
+     return render(request, "base/topics.html", context )
+
+def activityPage(request):
+    activities = Message.objects.all()
+    context ={"activities":activities}
+    return render(request, "base/activity.html", context)
