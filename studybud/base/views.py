@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import *
-from .forms import RoomForm
+from .forms import RoomForm, UserForm
 from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -78,7 +78,7 @@ def userProfile(request,id):
         rooms = user.room_set.all()
         activities = user.message_set.all()
         topic = Topic.objects.all()
-        context = {"rooms": rooms, "topics": topic,"activities":activities}
+        context = {"rooms": rooms, "topics": topic,"activities":activities, 'user':user}
         return render(request, "base/user-profile.html", context)
 
 def room(request, id):
@@ -160,3 +160,18 @@ def delete_message(request,id):
     else:
         message.delete()
         return redirect("home")
+
+@login_required(login_url="login")
+def updateUser(request):
+    user = request.user
+    if request.method == 'GET':
+        form = UserForm(instance = user)
+        context = {'form':form}
+        return render(request, "base/update-user.html", context)
+    else :
+        form = UserForm(request.POST, instance= user)
+        if form.is_valid():
+            form.save()
+            return redirect("user-profile", id = request.user.id)
+
+    
