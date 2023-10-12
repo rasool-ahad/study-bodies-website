@@ -3,7 +3,6 @@ from django.http import HttpResponse
 from .models import *
 from .forms import RoomForm, UserForm
 from django.db.models import Q
-from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
