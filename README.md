@@ -15,10 +15,10 @@ in this website you can learn programing languages with your studdy bodies :)
 ## Project Overview
 Study Bodies is a collaborative learning platform designed to facilitate knowledge sharing and discussions on a wide range of topics. Users can register, create posts, and engage in real-time chats with other members. Whether you're a student looking for study resources or an expert eager to share your knowledge, Study Bodies provides a dynamic space for learning and connecting.
 here is some screen shots: 
-[Alt text](./images/Capture.PNG)
-[Alt text](./images/Capture2.PNG)
-[Alt text](./images/Capture3.PNG)
-[Alt text](./images/Capture4.PNG)
+[Alt text](images/Capture.PNG)
+[Alt text](images/Capture2.PNG)
+[Alt text](images/Capture3.PNG)
+[Alt text](images/Capture4.PNG)
 ## Features
 
 * **User Authentication and Registration:** Securely register and log in using email or social media accounts.
